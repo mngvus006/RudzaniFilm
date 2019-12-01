@@ -54,7 +54,7 @@ export default function HeaderLinks(props) {
           className={classes.navLink}
         >
           <Link to="blogs" className={classes.listItem}>
-          <i class="fas fa-align-center"></i> Blog
+          <i className="fas fa-align-center"></i> Blog
           </Link>
         </Button>
       </ListItem>

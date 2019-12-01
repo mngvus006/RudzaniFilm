@@ -54,6 +54,7 @@ export default function LandingPage(props) {
         <AboutPage />
       </div>
 
+
       <Footer />
     </div>
   );

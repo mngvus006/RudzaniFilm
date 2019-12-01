@@ -19,6 +19,7 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
 // Sections for this page
 import BlogParagraphs from "./BlogParagraphs.js";
+import { getBlogPostById } from "./paragraphContext.js";
 
 const dashboardRoutes = [];
 
@@ -27,6 +28,8 @@ const useStyles = makeStyles(styles);
 export default function BlogPostLandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
+  const blogId = typeof(props.location.blogId) !== 'undefined' ? props.location.blogId : 1
+  const blogItem = getBlogPostById(blogId);
   return (
     <div>
       <Header
@@ -41,17 +44,17 @@ export default function BlogPostLandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/marikana.jpg")}>
+      <Parallax filter image={blogItem.bannerImage}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Mma Moeketsi</h1>
-              <h4>Based on a true event, the Marikana Massacre.</h4>
+      <h1 className={classes.title}>{blogItem.trailerName}</h1>
+      <h4>{blogItem.bannerSubTitle}</h4>
               <br />
               <Button
                 color="danger"
                 size="lg"
-                href="https://www.youtube.com/watch?v=ro23zJUzwls"
+                href={blogItem.youtubeLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -64,7 +67,7 @@ export default function BlogPostLandingPage(props) {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <BlogParagraphs />
+          <BlogParagraphs blogItem={blogItem} />
         </div>
       </div>
       <Footer />
